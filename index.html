@@ -9,19 +9,31 @@
       text-align: center;
       padding-top: 80px;
     }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      height: 100px; /* locks layout so nothing shifts */
+      align-items: center;
+    }
+
     button {
       font-size: 22px;
       padding: 15px 30px;
       border-radius: 30px;
       border: none;
       cursor: pointer;
-      margin: 20px;
     }
+
     #yes {
       background: #ff4d6d;
       color: white;
-      transition: transform 0.3s;
+      transition: transform 0.3s ease;
+      transform-origin: center;
     }
+
     #no {
       background: #aaa;
       color: white;
@@ -33,11 +45,14 @@
 <h1>Will you be my Valentine? 💖</h1>
 <p>No pressure. Just honesty 🤍</p>
 
-<button id="yes">YES 💖</button>
-<button id="no">NO 🤍</button>
+<div class="buttons">
+  <button id="yes">YES 💖</button>
+  <button id="no">NO 🤍</button>
+</div>
 
 <script>
   let size = 1;
+
   document.getElementById("no").onclick = function () {
     size += 0.25;
     document.getElementById("yes").style.transform =
