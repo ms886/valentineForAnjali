@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>A Simple Question 💖</title>
+  <title>Will you be my Valentine?</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #ffe6f0;
       text-align: center;
       padding-top: 80px;
-    }
-
-    h1 {
-      color: #333;
-    }
-
-    .buttons {
-      margin-top: 40px;
     }
 
     button {
@@ -39,10 +31,17 @@
     }
 
     #message {
-      margin-top: 30px;
+      margin-top: 25px;
       font-size: 18px;
       color: #555;
       min-height: 24px;
+    }
+
+    /* polite note */
+    p.note {
+      font-size: 12px;
+      color: #888;
+      margin-top: 30px;
     }
   </style>
 </head>
@@ -51,33 +50,54 @@
 <h1>Would you like to be my Valentine? 💖</h1>
 <p>Whatever you choose, I appreciate your honesty 🤍</p>
 
-<div class="buttons">
-  <button id="yes">Yes 💖</button>
-  <button id="no">No 🤍</button>
-</div>
+<button id="yes">Yes 💖</button>
+<button id="no">No 🤍</button>
 
 <div id="message"></div>
+<p class="note">This page records anonymous button clicks 🤍</p>
 
 <script>
+  let noCount = 0;
   let size = 1;
+
+  // Replace with your form info
+  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe7GEe4EXMCGBqW4Ado2B0p79ffmo-YgEwQzGfFSW68ppRy_g/formResponse";
+  const ENTRY_YES = "entry.123456789";    // Clicked yes
+  const ENTRY_NOCOUNT = "entry.987654321"; // No Count
+
+  function sendToForm(answer, count) {
+    fetch(FORM_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body:
+        ENTRY_YES + "=" + encodeURIComponent(answer) +
+        "&" + ENTRY_NOCOUNT + "=" + encodeURIComponent(count)
+    });
+  }
+
   const messages = [
-    "Totally okay 🤍",
-    "Thanks for being honest 🌸",
-    "I appreciate you saying how you feel 💫"
+    "Thanks for your honesty 🤍",
+    "I appreciate your answer 🌸",
+    "Totally okay — thanks for telling me 💫"
   ];
 
   document.getElementById("no").onclick = function () {
+    noCount++;
+    sendToForm("No", noCount);
+
     document.getElementById("message").textContent =
       messages[Math.floor(Math.random() * messages.length)];
 
     size += 0.05;
-    document.getElementById("yes").style.transform =
-      "scale(" + size + ")";
+    document.getElementById("yes").style.transform = `scale(${size})`;
   };
 
   document.getElementById("yes").onclick = function () {
+    sendToForm("Yes", 1);
+
     document.body.innerHTML =
-      "<h1>That means a lot 💖</h1><p>Thank you for saying yes 🌷</p>";
+      "<h1>That truly means a lot 💖</h1><p>Thank you for saying yes 🌷</p>";
   };
 </script>
 
