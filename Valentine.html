@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Will you be my Valentine?</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #ffe6f0;
+      text-align: center;
+      padding-top: 80px;
+    }
+    button {
+      font-size: 22px;
+      padding: 15px 30px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      margin: 20px;
+    }
+    #yes {
+      background: #ff4d6d;
+      color: white;
+      transition: transform 0.3s;
+    }
+    #no {
+      background: #aaa;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Will you be my Valentine? 💖</h1>
+<p>No pressure. Just honesty 🤍</p>
+
+<button id="yes">YES 💖</button>
+<button id="no">NO 🤍</button>
+
+<script>
+  let size = 1;
+  document.getElementById("no").onclick = function () {
+    size += 0.25;
+    document.getElementById("yes").style.transform =
+      "scale(" + size + ")";
+  };
+
+  document.getElementById("yes").onclick = function () {
+    document.body.innerHTML =
+      "<h1>You just made my day 🥹💖</h1><p>Guess this means something beautiful 🌸</p>";
+  };
+</script>
+
+</body>
+</html>
